@@ -16,8 +16,13 @@ root.left.left.left = new TreeNode(8);
 root.left.left.right = new TreeNode(9);
 root.left.right.left = new TreeNode(10);
 
-const sums = [];
-const SumOFNodes = (node, accSum = 0) => {
+function branchSum(rootNode) {
+  const allSum = [];
+  SumOFNodes(rootNode, 0, allSum);
+  return allSum;
+}
+
+const SumOFNodes = (node, accSum = 0, sums) => {
   if (!node) return;
   const sum = accSum + node.value;
 
@@ -26,9 +31,8 @@ const SumOFNodes = (node, accSum = 0) => {
     return;
   }
 
-  if (node.left) SumOFNodes(node.left, sum);
-  if (node.right) SumOFNodes(node.right, sum);
+  if (node.left) SumOFNodes(node.left, sum, sums);
+  if (node.right) SumOFNodes(node.right, sum, sums);
 };
 
-SumOFNodes(root);
-console.log(`sums : `, sums);
+console.log(`sums : `, branchSum(root));
